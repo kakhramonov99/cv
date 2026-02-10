@@ -2,17 +2,15 @@
 Author: Shakhzod Kakhramonov 
 Website address: https://kakhramonov99.github.io/cv/
 
-🚀 AI Engineer Portfolio Website
-Professional portfolio website for Shakhzod Kakhramonov
+## ✨ Features
 
-✨ Features
-✅ Implemented
+### ✅ Implemented
 
-Google Analytics 4 - Track visitors and website statistics
-Live Stats Widget - Display real-time visitor data
-Multi-Page Structure - Home, Projects, Contact pages
-Contact Form - Working contact form using Formspree
-3D Animations - Neural network particle system and AI orbit
-Projects Showcase - Filterable project gallery
-Responsive Design - Works on all devices
-SEO Optimized - Meta tags and structured data
+1. **Google Analytics 4** - Track visitors and website statistics
+2. **Live Stats Widget** - Display real-time visitor data
+3. **Multi-Page Structure** - Home, Projects, Contact pages
+4. **Contact Form** - Working contact form using Formspree
+5. **3D Animations** - Neural network particle system and AI orbit
+6. **Projects Showcase** - Filterable project gallery
+7. **Responsive Design** - Works on all devices
+8. **SEO Optimized** - Meta tags and structured data
