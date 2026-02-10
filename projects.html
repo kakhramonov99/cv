@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Shakhzod Kakhramonov</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00fff5;
+            --secondary: #7b2cbf;
+            --accent: #ff006e;
+            --dark: #0a0e27;
+            --darker: #050714;
+            --light: #e0f7fa;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(0, 255, 245, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .holo-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 255, 245, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 245, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 7, 20, 0.95);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(224, 247, 250, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Header */
+        .page-header {
+            padding: 150px 6% 80px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: rgba(224, 247, 250, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filter */
+        .filter-container {
+            padding: 2rem 6%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--light);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--darker);
+            border-color: var(--primary);
+        }
+
+        /* Projects Grid */
+        .projects-container {
+            padding: 2rem 6% 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(0, 255, 245, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: rgba(224, 247, 250, 0.6);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-description {
+            color: rgba(224, 247, 250, 0.7);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 245, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 255, 245, 0.2);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--primary);
+            color: var(--darker);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: rgba(5, 7, 20, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 2rem 6%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        footer p {
+            color: rgba(224, 247, 250, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="holo-grid"></div>
+
+    <div class="content-wrapper">
+        <nav>
+            <div class="logo">ShK</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-header">
+            <h1 class="page-title">Projects & Research</h1>
+            <p class="page-subtitle">
+                Explore my work in AI, Machine Learning, and Computer Vision
+            </p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+            <button class="filter-btn" data-filter="cv">Computer Vision</button>
+            <button class="filter-btn" data-filter="ai">AI Research</button>
+        </div>
+
+        <div class="projects-container">
+            <div class="projects-grid" id="projects-grid">
+                <div class="loading">Loading projects...</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Shakhzod Kakhramonov. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sample projects (replace with real data or GitHub API)
+        const projects = [
+            {
+                icon: '🧠',
+                title: 'Handwritten Text Recognition',
+                description: 'Deep learning model for recognizing handwritten text using CNN and LSTM networks. Achieved 95% accuracy on test dataset.',
+                tags: ['Python', 'PyTorch', 'Computer Vision', 'Deep Learning'],
+                category: 'cv',
+                stars: 15,
+                forks: 5,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            },
+            {
+                icon: '👁️',
+                title: 'Image Segmentation Pipeline',
+                description: 'Advanced image segmentation using U-Net architecture for medical imaging applications.',
+                tags: ['TensorFlow', 'Keras', 'Medical AI', 'Segmentation'],
+                category: 'cv',
+                stars: 23,
+                forks: 8,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            },
+            {
+                icon: '🤖',
+                title: 'AI Chatbot Framework',
+                description: 'Intelligent chatbot using transformer models and fine-tuned on domain-specific data.',
+                tags: ['NLP', 'Transformers', 'Python', 'API'],
+                category: 'ai',
+                stars: 42,
+                forks: 12,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            },
+            {
+                icon: '📊',
+                title: 'ML Model Optimization',
+                description: 'Framework for optimizing machine learning models using quantization and pruning techniques.',
+                tags: ['PyTorch', 'Optimization', 'Model Compression'],
+                category: 'ml',
+                stars: 18,
+                forks: 6,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            },
+            {
+                icon: '🎨',
+                title: 'Style Transfer Application',
+                description: 'Neural style transfer implementation for artistic image generation using GANs.',
+                tags: ['GANs', 'PyTorch', 'Computer Vision', 'Art'],
+                category: 'cv',
+                stars: 31,
+                forks: 9,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            },
+            {
+                icon: '🔍',
+                title: 'Object Detection System',
+                description: 'Real-time object detection using YOLO architecture for autonomous systems.',
+                tags: ['YOLO', 'Real-time', 'OpenCV', 'Detection'],
+                category: 'cv',
+                stars: 27,
+                forks: 11,
+                github: 'https://github.com/kakhramonov99',
+                demo: null
+            }
+        ];
+
+        // Render projects
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projects-grid');
+            const filteredProjects = filter === 'all' 
+                ? projects 
+                : projects.filter(p => p.category === filter);
+
+            grid.innerHTML = filteredProjects.map(project => `
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">${project.icon}</div>
+                        <div class="project-stats">
+                            <span class="stat">⭐ ${project.stars}</span>
+                            <span class="stat">🔀 ${project.forks}</span>
+                        </div>
+                    </div>
+                    <h3 class="project-title">${project.title}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tech">
+                        ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="project-links">
+                        <a href="${project.github}" target="_blank" class="project-link">
+                            💻 Code
+                        </a>
+                        ${project.demo ? `<a href="${project.demo}" target="_blank" class="project-link">🚀 Demo</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        // Initial render
+        renderProjects();
+
+        // Optional: Fetch real GitHub repos
+        /*
+        fetch('https://api.github.com/users/kakhramonov99/repos?sort=updated&per_page=10')
+            .then(res => res.json())
+            .then(repos => {
+                // Process and render repos
+            });
+        */
+    </script>
+</body>
+</html>
